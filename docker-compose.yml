@@ -1,0 +1,11 @@
+services:
+    financet:
+        build: .
+        container_name: finance
+        restart: always
+        env_file:
+            - .env
+        environment:
+            - TZ=Asia/Bangkok
+        volumes:
+            - ./src/state.json:/usr/src/app/src/state.json
