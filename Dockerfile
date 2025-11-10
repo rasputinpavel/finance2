@@ -1,10 +1,7 @@
-FROM node:18-slim
+FROM oven/bun:1 as base
 WORKDIR /usr/src/app
-RUN apt-get update && apt-get install -y \
-    cron \
-    && rm -rf /var/lib/apt/lists/*
-COPY package.json ./
-RUN npm install
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 COPY . .
 RUN chmod +x /usr/src/app/entrypoint.sh
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
